@@ -12,13 +12,15 @@ public class QueryFilter {
     }
 
     public static QueryFilter of(String key, Object value) {
-        // TODO: RED - 구현 전 스텁
-        return null;
+        Map<String, Object> conditions = new HashMap<>();
+        conditions.put(key, value);
+        return new QueryFilter(conditions);
     }
 
     public QueryFilter and(String key, Object value) {
-        // TODO: RED - 구현 전 스텁
-        return null;
+        Map<String, Object> merged = new HashMap<>(this.conditions);
+        merged.put(key, value);
+        return new QueryFilter(merged);
     }
 
     public Map<String, Object> getConditions() {

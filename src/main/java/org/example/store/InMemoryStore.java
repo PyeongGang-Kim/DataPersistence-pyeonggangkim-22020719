@@ -28,8 +28,10 @@ public class InMemoryStore implements DataStore {
 
     @Override
     public List<Record> query(QueryFilter filter) {
-        // TODO: M3에서 구현
-        return List.of();
+        return storage.values().stream()
+                .filter(record -> filter.getConditions().entrySet().stream()
+                        .allMatch(entry -> entry.getValue().equals(record.getField(entry.getKey()))))
+                .collect(java.util.stream.Collectors.toList());
     }
 
     @Override
